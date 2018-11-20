@@ -1,0 +1,30 @@
+
+//criando aplicação******	
+ng new finansys --routing --skip-tests
+
+//adicionando bootstrap e jquery ao projeto
+npm i bootstrap jquery --save
+
+//componente mascara de campos
+npm i angular-imask --save
+
+//componente manipular numeros/financeiro
+npm i currency-formatter --save
+
+//manipulação de data e hora
+npm i moment --save
+
+//exibir mensagens de aviso
+npm i toastr --save
+
+
+//componentes angular (calendarios, listas, graficos, tabelas..)
+npm i primeng --save
+npm i primeicons --save
+
+//usar graficos do primeng
+npm i chart.js --save
+
+
+//simulador de backend do angular
+npm i angular-in-memory-web-api --save
