@@ -1,5 +1,5 @@
 
-//criando aplicação******	
+//criando aplicaï¿½ï¿½o******
 ng new finansys --routing --skip-tests
 
 //adicionando bootstrap e jquery ao projeto
@@ -11,7 +11,7 @@ npm i angular-imask --save
 //componente manipular numeros/financeiro
 npm i currency-formatter --save
 
-//manipulação de data e hora
+//manipulaï¿½ï¿½o de data e hora
 npm i moment --save
 
 //exibir mensagens de aviso
@@ -28,3 +28,14 @@ npm i chart.js --save
 
 //simulador de backend do angular
 npm i angular-in-memory-web-api --save
+
+
+----------------------------------------------------------------
+//criar diretorio para os componentes (modulo e rotas)
+ng g m pages/categories --routing
+
+//criaÃ§Ã£o do componente
+ng g c pages/categories/category-list
+ng g c pages/categories/category-form
+
+//realizar configuraÃ§Ã£o de rotas
