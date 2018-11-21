@@ -48,3 +48,5 @@ ng g c pages/categories/category-form
 //configurar template cotegorias
 
 //criado database para categorias
+
+//adicionado modelo
