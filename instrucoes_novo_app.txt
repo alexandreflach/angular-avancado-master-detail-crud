@@ -43,3 +43,8 @@ ng g c pages/categories/category-form
 //adicionar componentes
 
 //configurar navbar
+
+
+//configurar template cotegorias
+
+//criado database para categorias
