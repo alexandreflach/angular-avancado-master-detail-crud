@@ -39,3 +39,7 @@ ng g c pages/categories/category-list
 ng g c pages/categories/category-form
 
 //realizar configuração de rotas
+
+//adicionar componentes
+
+//configurar navbar
