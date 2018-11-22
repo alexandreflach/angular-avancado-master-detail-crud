@@ -50,3 +50,7 @@ ng g c pages/categories/category-form
 //criado database para categorias
 
 //adicionado modelo
+
+//adicionando serviço de categorias e implementação
+ng g s pages/category/shared/category
+
