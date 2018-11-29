@@ -55,3 +55,5 @@ ng g c pages/categories/category-form
 ng g s pages/category/shared/category
 
 //incluir interceptador de requisições do inMemory
+
+//implementado listagem de categorias com remoção e edição

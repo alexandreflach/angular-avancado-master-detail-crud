@@ -4,9 +4,7 @@ import { Category } from '../../categories/shared/category.model';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError, flatMap } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CategoryService {
 
   private apiPath: string = "api/categories"
