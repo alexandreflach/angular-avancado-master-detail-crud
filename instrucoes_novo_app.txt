@@ -54,3 +54,4 @@ ng g c pages/categories/category-form
 //adicionando serviço de categorias e implementação
 ng g s pages/category/shared/category
 
+//incluir interceptador de requisições do inMemory
