@@ -4,6 +4,7 @@ import { CategoryService } from '../../category/shared/category.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
+import toastr from 'toastr'
 
 @Component({
   selector: 'app-category-form',
@@ -34,6 +35,15 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
 
   ngAfterContentChecked(): void {
     this.setPageTitle()
+  }
+
+  private submitForm(){
+    this.submittingForm = true
+
+    if( this.currentAction == 'new'){
+      this.createCategory()
+    }else
+      this.updateCategory()
   }
 
   private setCurrentAction() {
@@ -75,4 +85,37 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
     }
   }
 
+  private createCategory(){
+    const category: Category = Object.assign(new Category(), this.categoryForm.value)
+    this.categoryService.create(category)
+      .subscribe(
+        category => this.actionsForSuccess(category),
+        error => this.actionForError(error))
+  }
+
+  private updateCategory(){
+    const category: Category = Object.assign(new Category(), this.categoryForm.value)
+    this.categoryService.update(category)
+      .subscribe(
+        category => this.actionsForSuccess(category),
+        error => this.actionForError(error))
+  }
+
+  private actionsForSuccess(category: Category){
+    toastr.success('Solicitação processada com sucesso!')
+    this.router.navigateByUrl("categories", {skipLocationChange: true}).then(
+      () => this.router.navigate(["categories", category.id, "edit"])
+    )
+  }
+
+  private actionForError(error){
+    toastr.error('Ocorreu um erro ao processar sua solicitação!')
+    this.submittingForm = false
+
+    if(error.status === 422){
+      this.serverErrorMessages = JSON.parse(error._body).errors
+    }else {
+      this.serverErrorMessages = ["Falha de comunicação com o servidor, por favor tente mais tarde."]
+    }
+  }
 }
