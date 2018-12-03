@@ -40,18 +40,17 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
   private submitForm(){
     this.submittingForm = true
 
-    if( this.currentAction == 'new'){
+    if (this.currentAction == 'new')
       this.createCategory()
-    }else
+    else
       this.updateCategory()
   }
 
   private setCurrentAction() {
-    if(this.route.snapshot.url[0].path === "new"){
+    if(this.route.snapshot.url[0].path === "new")
       this.currentAction = "new"
-    }else{
+    else
       this.currentAction = "edit"
-    }
   }
 
   private buildCategoryForm(){
