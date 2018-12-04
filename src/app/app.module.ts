@@ -7,6 +7,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDatabase } from './in-memory-database';
 import { HttpClientModule } from '@angular/common/http';
 import { CategoryService } from './pages/category/shared/category.service';
+import { EntryService } from './pages/entries/shared/entry.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { CategoryService } from './pages/category/shared/category.service';
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDatabase)
   ],
-  providers: [CategoryService],
+  providers: [CategoryService, EntryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
