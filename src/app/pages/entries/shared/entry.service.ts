@@ -56,8 +56,6 @@ export class EntryService {
         )
       })
     )
-
-
   }
 
   delete(id: number) : Observable<any> {
