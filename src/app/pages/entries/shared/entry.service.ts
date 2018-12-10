@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Entry } from '../../entries/shared/entry.model';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError, flatMap } from 'rxjs/operators';
-import { CategoryService } from '../../category/shared/category.service';
+import { CategoryService } from '../../categories/shared/category.service';
 
 @Injectable()
 export class EntryService {

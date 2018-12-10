@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { Category } from '../shared/category.model';
-import { CategoryService } from '../../category/shared/category.service';
+import { CategoryService } from '../shared/category.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';

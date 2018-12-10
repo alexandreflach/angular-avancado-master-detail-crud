@@ -6,7 +6,7 @@ import { switchMap } from 'rxjs/operators';
 import toastr from 'toastr'
 import { EntryService } from '../shared/entry.service';
 import { Category } from '../../categories/shared/category.model';
-import { CategoryService } from '../../category/shared/category.service';
+import { CategoryService } from '../../categories/shared/category.service';
 
 @Component({
   selector: 'app-entry-form',

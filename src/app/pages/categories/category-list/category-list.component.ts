@@ -1,5 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { CategoryService } from '../../category/shared/category.service';
+import { CategoryService } from '../shared/category.service';
 import { Category } from '../shared/category.model';
 
 @Component({

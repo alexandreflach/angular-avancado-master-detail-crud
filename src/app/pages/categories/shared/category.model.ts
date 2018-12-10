@@ -1,11 +1,7 @@
-import { BaseResourceModel } from "./models/base-resource.model";
-
-export class Category extends BaseResourceModel {
+export class Category {
   constructor(
     public id?:number,
     public name?: string,
-    public description?: string)
-    {
-      super()
-    }
+    public description?: string
+  ){}
 }

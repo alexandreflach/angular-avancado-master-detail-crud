@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDatabase } from '../in-memory-database';
-import { CategoryService } from '../pages/category/shared/category.service';
+import { CategoryService } from '../pages/categories/shared/category.service';
 import { EntryService } from '../pages/entries/shared/entry.service';
 
 @NgModule({
