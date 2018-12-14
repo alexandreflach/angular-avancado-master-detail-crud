@@ -1,120 +1,38 @@
-import { Component, OnInit, AfterContentChecked } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import { Category } from '../shared/category.model';
 import { CategoryService } from '../shared/category.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { switchMap } from 'rxjs/operators';
-import toastr from 'toastr'
+import { Validators } from '@angular/forms';
+import { BaseResourceFormComponent } from 'src/app/shared/components/base-resource-form/base-resource-form.component';
 
 @Component({
   selector: 'app-category-form',
   templateUrl: './category-form.component.html',
   styleUrls: ['./category-form.component.css']
 })
-export class CategoryFormComponent implements OnInit, AfterContentChecked {
-
-  currentAction: string
-  categoryForm: FormGroup
-  pageTitle: string
-  serverErrorMessages: string[] = null
-  submittingForm: boolean = false
-  category: Category = new Category()
+export class CategoryFormComponent extends BaseResourceFormComponent<Category> {
 
   constructor(
-    private categoryService: CategoryService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private formBuilder: FormBuilder
-  ) { }
+    protected categoryService: CategoryService,
+    protected injector: Injector
+  ) {
+    super(injector, new Category(), categoryService, Category.fromJson)
+   }
 
-  ngOnInit() {
-    this.setCurrentAction()
-    this.buildCategoryForm()
-    this.loadCategory()
-  }
-
-  ngAfterContentChecked(): void {
-    this.setPageTitle()
-  }
-
-  private submitForm(){
-    this.submittingForm = true
-
-    if (this.currentAction == 'new')
-      this.createCategory()
-    else
-      this.updateCategory()
-  }
-
-  private setCurrentAction() {
-    if(this.route.snapshot.url[0].path === "new")
-      this.currentAction = "new"
-    else
-      this.currentAction = "edit"
-  }
-
-  private buildCategoryForm(){
-    this.categoryForm = this.formBuilder.group({
+  protected buildResourceForm(): void {
+    this.resourceForm = this.formBuilder.group({
       id: [null],
       name: [null, [Validators.required, Validators.minLength(2)]],
       description: [null]
     })
   }
 
-  private loadCategory(){
-    if(this.currentAction === "edit"){
-      this.route.paramMap.pipe(
-        switchMap(params => this.categoryService.getById(+params.get("id")))
-      ).subscribe(
-        (category) => {
-          this.category = category;
-          this.categoryForm.patchValue(this.category)
-        },
-        (error)=> alert('Ocorreu um erro no servidor, tente mais tarde')
-      )
-    }
+  protected creationPageTitle() : string{
+    return "Cadastro de nova categoria"
   }
 
-  private setPageTitle(){
-    if(this.currentAction =='new'){
-      this.pageTitle = "Cadastro de nova categoria"
-    }else{
-      const categoryName = this.category.name || ""
-      this.pageTitle = 'Editando Categoria: ' + categoryName
-    }
+  protected editionPageTitle() :string {
+    const name = this.resource.name || "";
+      return "Editando categoria " + name
   }
 
-  private createCategory(){
-    const category: Category = Object.assign(new Category(), this.categoryForm.value)
-    this.categoryService.create(category)
-      .subscribe(
-        category => this.actionsForSuccess(category),
-        error => this.actionForError(error))
-  }
-
-  private updateCategory(){
-    const category: Category = Object.assign(new Category(), this.categoryForm.value)
-    this.categoryService.update(category)
-      .subscribe(
-        category => this.actionsForSuccess(category),
-        error => this.actionForError(error))
-  }
-
-  private actionsForSuccess(category: Category){
-    toastr.success('Solicitação processada com sucesso!')
-    this.router.navigateByUrl("categories", {skipLocationChange: true}).then(
-      () => this.router.navigate(["categories", category.id, "edit"])
-    )
-  }
-
-  private actionForError(error){
-    toastr.error('Ocorreu um erro ao processar sua solicitação!')
-    this.submittingForm = false
-
-    if(error.status === 422){
-      this.serverErrorMessages = JSON.parse(error._body).errors
-    }else {
-      this.serverErrorMessages = ["Falha de comunicação com o servidor, por favor tente mais tarde."]
-    }
-  }
 }
